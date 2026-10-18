@@ -439,6 +439,15 @@ dialog{position:fixed}
 .b-list li{padding:6px 10px}
 .b-list .n{font-size:14px}
 .b-list button{width:32px;min-height:32px;padding:0;font-size:15px;border-radius:50%}
+
+/* ---------- v7: محاذاة بطاقات الصف الواحد + أزرار القائمة بنفس المستوى ---------- */
+.grid > li{display:flex;flex-direction:column}
+.tile{flex:1 1 auto;display:flex;flex-direction:column;align-items:stretch;justify-content:flex-start}
+.tile .price{gap:6px}
+.tile .price i.b2{font-size:11px;line-height:17px;padding:0 7px;white-space:nowrap}
+.tile .pid{margin-top:4px}
+.addbtn.mini{margin-top:10px;flex:none}
+.case .tag{white-space:nowrap;max-width:calc(100% - 12px);overflow:hidden;text-overflow:ellipsis}
 </style>
 </head>
 <body>
@@ -610,6 +619,8 @@ const CATS = [
 const CAT_LABEL = Object.fromEntries(CATS);
 const hasB = (g, t) => (g.badges || []).includes(t);
 const SPECIAL_TAGS = {"معرّبة":["t-ar","معرّبة"],"جديد":["t-new","جديد 🆕"],"الأكثر طلبًا":["t-hot","الأكثر طلبًا 🔥"]};
+const EXTRA_SHORT = {"دبلجة عربية":"دبلجة","مع الإضافات":"إضافات"};
+function tagLabel(g, k){ let t = SPECIAL_TAGS[k][1]; if (k === "معرّبة") (g.badges || []).forEach(b => { if (EXTRA_SHORT[b]) t += " + " + EXTRA_SHORT[b]; }); return t; }
 const PLAT = {ps5:"PS5", ps4:"PS4", ps4ps5:"PS4 و PS5"};
 const VIEW_PLAT = {ps5:"PS5", ps4:"PS4"};
 
@@ -752,9 +763,9 @@ function render(){
     btn.type = "button";
     btn.className = "tile";
     btn.innerHTML =
-      '<span class="case"><span class="band">' + PLAT[g.plat] + '</span>' + Object.keys(SPECIAL_TAGS).filter(k => hasB(g, k)).map(k => '<span class="tag ' + SPECIAL_TAGS[k][0] + '">' + SPECIAL_TAGS[k][1] + '</span>').join('') + '<img loading="lazy" decoding="async" alt="غلاف لعبة ' + g.name.replace(/"/g,"&quot;") + '" src="' + g.img + '"></span>' +
+      '<span class="case"><span class="band">' + PLAT[g.plat] + '</span>' + Object.keys(SPECIAL_TAGS).filter(k => hasB(g, k)).map(k => '<span class="tag ' + SPECIAL_TAGS[k][0] + '">' + tagLabel(g, k) + '</span>').join('') + '<img loading="lazy" decoding="async" alt="غلاف لعبة ' + g.name.replace(/"/g,"&quot;") + '" src="' + g.img + '"></span>' +
       '<span class="name"></span>' +
-      (g.price ? '<span class="price"><b>' + g.price + ' ليرة</b><i>عرض خاص</i>' + (g.badges || []).filter(t => !SPECIAL_TAGS[t]).map(t => '<i class="b2">' + t + '</i>').join("") + '</span>' : '') +
+      (g.price ? '<span class="price"><b>' + g.price + ' ليرة</b><i>عرض خاص</i></span>' : '') +
       '<span class="pid">رقم <bdi dir="ltr">' + g.id + '</bdi></span>';
     btn.querySelector(".name").textContent = g.name;
     btn.addEventListener("click", () => openGame(g));
