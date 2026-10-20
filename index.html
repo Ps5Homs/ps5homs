@@ -449,6 +449,11 @@ dialog{position:fixed}
 .tile .pid{margin-top:4px}
 .addbtn.mini{margin-top:10px;flex:none}
 .case .tag{white-space:nowrap;max-width:calc(100% - 12px);overflow:hidden;text-overflow:ellipsis}
+
+/* ---------- v9: وسم الغلاف صغير وفي الزاوية ---------- */
+.case .tag{inset-block-start:20px;inset-inline-start:0;font-size:10px;line-height:16px;padding:0 7px;font-weight:700;border-radius:0;border-end-end-radius:8px;box-shadow:0 1px 4px rgba(0,0,0,.45);opacity:.96}
+.case .tag + .tag{inset-block-start:36px}
+.case .tag + .tag + .tag{inset-block-start:52px}
 </style>
 </head>
 <body>
@@ -882,7 +887,7 @@ dlg.addEventListener("click", e => { if (e.target === dlg) dlg.close(); });
 render();
 
 /* ---------- الأجهزة والإكسسوارات ---------- */
-const DEVICES = [{"cat": "console", "name": "PS3 Slim 160GB", "price": "75$", "specs": [["السعة", "160GB"], ["الحالة", "مستعمل، حالة ممتازة وخالٍ من المشاكل"], ["إصدار النظام", "معدّل 4.93"], ["الضمان", "48 ساعة"], ["مع الجهاز", "4 قبضات"]]}, {"cat": "console", "name": "PS4 Slim 1TB", "price": "210$", "specs": [["السعة", "1 تيرابايت"], ["الحالة", "مستعمل، خالٍ من العيوب والصيانة"], ["إصدار النظام", "معدّل 13.52"], ["الضمان", "48 ساعة"], ["مع الجهاز", "2 قبضة أصلية"]]}, {"cat": "console", "name": "PS4 Slim 500GB", "price": "190$", "specs": [["السعة", "500GB"], ["الحالة", "مستعمل، خالٍ من العيوب والصيانة"], ["إصدار النظام", "معدّل 9"], ["الضمان", "48 ساعة"], ["مع الجهاز", "2 قبضة أصلية"]]}];
+const DEVICES = [{"cat": "console", "name": "PS3 Slim 160GB", "price": "75$", "specs": [["السعة", "160GB"], ["الحالة", "مستعمل، حالة ممتازة وخالٍ من المشاكل"], ["إصدار النظام", "معدّل 4.93"], ["الضمان", "48 ساعة"], ["مع الجهاز", "4 قبضات"]]}, {"cat": "console", "name": "PS4 Slim 1TB", "price": "220$", "specs": [["السعة", "1 تيرابايت"], ["الحالة", "مستعمل، خالٍ من العيوب والصيانة"], ["إصدار النظام", "معدّل 13.52"], ["الضمان", "48 ساعة"], ["مع الجهاز", "2 قبضة أصلية"]]}, {"cat": "console", "name": "PS4 Slim 500GB", "price": "190$", "specs": [["السعة", "500GB"], ["الحالة", "مستعمل، خالٍ من العيوب والصيانة"], ["إصدار النظام", "معدّل 9"], ["الضمان", "48 ساعة"], ["مع الجهاز", "2 قبضة أصلية"]]}];
 const DEV_CATS = [["console","الأجهزة"],["accessory","الإكسسوارات"]];
 function renderDevices(){
   const box = $("devList");
