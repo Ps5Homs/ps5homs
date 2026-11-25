@@ -524,6 +524,15 @@ dialog{position:fixed}
 @media (min-width:700px){.updates{margin-inline:auto}}
 .updates h2{margin:0 0 4px;font-size:16px;color:var(--gold-hi)}
 .updates ul{margin:0;padding-inline-start:18px;font-size:14px;line-height:1.7}
+/* v13: وسوم الغلاف أصغر */
+.case .tag{font-size:8px;line-height:12px;padding:0 5px;inset-block-start:20px;letter-spacing:0}
+.case .tag + .tag{inset-block-start:33px}
+.case .tag + .tag + .tag{inset-block-start:46px}
+@media (max-width:559px){
+  .case .tag{font-size:7.5px;line-height:11px;padding:0 4px;inset-block-start:16px}
+  .case .tag + .tag{inset-block-start:28px}
+  .case .tag + .tag + .tag{inset-block-start:40px}
+}
 </style>
 </head>
 <body>
@@ -732,7 +741,7 @@ const CATS = [
 ];
 const CAT_LABEL = Object.fromEntries(CATS);
 const hasB = (g, t) => (g.badges || []).includes(t);
-const SPECIAL_TAGS = {"معرّبة":["t-ar","معرّبة"],"تعريب حصري":["t-excl","تعريب حصري ★"],"دعم عربي رسمي":["t-off","دعم عربي رسمي"],"جديد":["t-new","جديد 🆕"],"الأكثر طلبًا":["t-hot","الأكثر طلبًا 🔥"],"محاكي":["t-emu","على محاكي"]};
+const SPECIAL_TAGS = {"معرّبة":["t-ar","معرّبة"],"تعريب حصري":["t-excl","تعريب حصري"],"دعم عربي رسمي":["t-off","دعم عربي رسمي"],"جديد":["t-new","جديد"],"الأكثر طلبًا":["t-hot","الأكثر طلبًا"],"محاكي":["t-emu","على محاكي"]};
 function applyImgs(){
   if (!window.IMGS) return;
   GAMES.forEach(g => { if (IMGS[g.id]) g.img = IMGS[g.id]; });
